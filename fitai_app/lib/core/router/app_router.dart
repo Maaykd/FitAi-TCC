@@ -4,13 +4,15 @@ import '../../presentation/pages/auth/login_page.dart';
 import '../../core/theme/app_theme.dart';
 import '../../presentation/pages/dashboard/dashboard_page.dart';
 import '../../presentation/pages/workouts/workouts_page.dart';
+import '../../presentation/pages/chat/chat_page.dart';  // 👈 Adicione este import
 
 /// Rotas da aplicação FITAI
 class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String dashboard = '/dashboard';
-  static const String workouts = '/workouts';  // Nova rota
+  static const String workouts = '/workouts';
+  static const String chat = '/chat';  // 👈 Adicionado
 }
 
 /// Sistema de roteamento da aplicação FITAI
@@ -39,10 +41,17 @@ class AppRouter {
         name: 'dashboard',
         builder: (context, state) => const DashboardPage(),
       ),
+      
       GoRoute(
         path: AppRoutes.workouts,
-       name: 'workouts',
-       builder: (context, state) => const WorkoutsPage(),
+        name: 'workouts',
+        builder: (context, state) => const WorkoutsPage(),
+      ),
+      
+      GoRoute(  // 👈 Adicionado
+        path: AppRoutes.chat,
+        name: 'chat',
+        builder: (context, state) => const ChatPage(),
       ),
     ],
     
@@ -77,6 +86,24 @@ class AppRouter {
     }
   }
 
+  static void goToWorkouts() {  
+    try {
+      _router.go(AppRoutes.workouts);
+      debugPrint('✅ Navegação para Workouts realizada');
+    } catch (e) {
+      debugPrint('❌ Erro ao navegar para Workouts: $e');
+    }
+  }
+
+  static void goToChat() {  // 👈 Adicionado
+    try {
+      _router.go(AppRoutes.chat);
+      debugPrint('✅ Navegação para Chat realizada');
+    } catch (e) {
+      debugPrint('❌ Erro ao navegar para Chat: $e');
+    }
+  }
+
   static void goBack() {
     try {
       if (_router.canPop()) {
@@ -96,14 +123,6 @@ class AppRouter {
     } catch (e) {
       debugPrint('❌ Erro durante logout: $e');
     }
-  }
-  static void goToWorkouts() {  
-    try {
-    _router.go(AppRoutes.workouts);
-    debugPrint('✅ Navegação para Workouts realizada');
-   } catch (e) {
-      debugPrint('❌ Erro ao navegar para Workouts: $e');
-  }
   }
 }
 

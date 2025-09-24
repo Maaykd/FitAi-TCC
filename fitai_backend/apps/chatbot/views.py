@@ -10,6 +10,7 @@ from django.conf import settings
 from datetime import datetime, timedelta
 from functools import wraps
 from typing import Dict, List  # Adicionado esta linha
+from rest_framework.permissions import IsAuthenticated, AllowAny  # ← Adicione AllowAny aqui
 
 from .models import Conversation, Message, ChatContext, ChatMetrics
 from .services.chat_service import ChatService
@@ -91,7 +92,10 @@ def rate_limit_chatbot(max_requests_per_hour=30, max_requests_per_day=200):
     return decorator
 
 
+from rest_framework.permissions import AllowAny  # ← Adicione no topo do arquivo
+
 @api_view(['GET'])
+@permission_classes([AllowAny])  # ← Adicione esta linha
 def test_chatbot_api(request):
     """Teste da API do chatbot com status detalhado"""
     try:

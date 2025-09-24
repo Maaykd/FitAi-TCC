@@ -169,7 +169,7 @@ class DashboardPage extends StatelessWidget {
                 gradient: const LinearGradient(
                   colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
                 ),
-                onTap: () => _showComingSoon(context, 'Chat IA'),
+                onTap: () => AppRouter.goToChat(),
               ),
             ),
           ],
@@ -274,7 +274,7 @@ class DashboardPage extends StatelessWidget {
              AppRouter.goToWorkouts();
               break;
             case 2:
-              _showComingSoon(context, 'Chat');
+              AppRouter.goToChat();
               break;
             case 3:
               _showComingSoon(context, 'Progresso');
